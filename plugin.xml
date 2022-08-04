@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-tencent-map" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>TencentMap</name>
+	<js-module name="TencentMap" src="www/TencentMap.js">
+		<clobbers target="TencentMap" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<!-- JS调用时的名字 -->
+            <feature name="TencentMap">
+                <!-- value：的值是对应的插件中ToastDemo.java存放的路径 -->
+                <param name="android-package" value="cn.mancando.cordovaplugin.tencentmap.TencentMap"/>
+            </feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <!-- src:是插件里存放对应.java的路径， target-dir:安装插件时把.java文件存放的位置，要和上面的value路径对应 -->
+        <source-file src="src/android/TencentMap.java" target-dir="src/cn/mancando/cordovaplugin/tencentmap" />
+        <lib-file src="src/android/TencentLocationSDK-v7.4.7-r737ed961-20220627195847-release.jar" target-dir="libs"/>
+        
+        <resource-file src="src/android/libs/arm64-v8a/libtencentloc.so" target="jniLibs/arm64-v8a/libtencentloc.so"/>
+        <resource-file src="src/android/libs/armeabi/libtencentloc.so" target="jniLibs/armeabi/libtencentloc.so"/>
+        <resource-file src="src/android/libs/armeabi-v7a/libtencentloc.so" target="jniLibs/armeabi-v7a/libtencentloc.so"/>
+        <resource-file src="src/android/libs/x86/libtencentloc.so" target="jniLibs/x86/libtencentloc.so"/>
+        <resource-file src="src/android/libs/x86_64/libtencentloc.so" target="jniLibs/x86_64/libtencentloc.so"/>
+
+        <!-- 通过GPS得到精确位置 -->
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+		<!-- 通过网络得到粗略位置 -->
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+		<!-- 访问网络，某些位置信息需要从网络服务器获取 -->
+		<uses-permission android:name="android.permission.INTERNET"/>
+		<!-- 访问WiFi状态，需要WiFi信息用于网络定位 -->
+		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+		<!-- 修改WiFi状态，发起WiFi扫描, 需要WiFi信息用于网络定位 -->
+		<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+		<!-- 访问网络状态, 检测网络的可用性，需要网络运营商相关信息用于网络定位 -->
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+		<!-- 访问网络的变化, 需要某些信息用于网络定位 -->
+		<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+		<!-- 蓝牙扫描权限 -->
+		<uses-permission android:name="android.permission.BLUETOOTH"/>
+		<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+		<!-- 前台service权限 -->
+		<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+		<!-- 后台定位权限 -->
+		<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+	</platform>
+</plugin>
